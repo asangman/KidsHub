@@ -293,9 +293,9 @@ let ex4_colorCount;
 function preload()
 {
   ///////////////////////////////// main menu //////////////////////////////////////////
-  bgFirst = loadImage('firstPic.png');
+  bgFirst = loadImage('FirstPagePic.gif');
   song = loadSound('mainSong.mp3');
-  bgMainMenu = loadImage('nevigatorPic.png')
+  bgMainMenu = loadImage('MainPic.png')
   ex1_buttonAtMain1 = loadImage('res\\mainMenu\\ex1_buttonAtMain.jpg');
   ex1_buttonAtMain2 = loadImage('res\\mainMenu\\ex1_buttonAtMain.jpg')
   ex2_buttonAtMain1 = loadImage('res\\mainMenu\\ex2_buttonAtMain.jpg');
