@@ -1,3 +1,4 @@
+////////////////////////////////// Main menu ///////////////////////////////////////
 var at = 0;
 var song;
 let bgFirst;
@@ -17,7 +18,55 @@ var ex2_buttonAtMain2;
 var ex1_buttonAtMain;
 var ex1_buttonAtMain1;
 var ex1_buttonAtMain2;
+var ex1_textAtMain;
+var ex2_textAtMain;
+var ex3_textAtMain;
+var ex4_textAtMain;
 var soundMainOn = false;
+///////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////// exercise 1 ////////////////////////////////////////
+var rY = 150
+var rX = 40
+
+let x = 613
+let y = 100
+
+let x2 = 650
+let y2 = 50
+
+let x3 = 640
+let y3 = 150
+
+let x4 = 610
+let y4 = 100
+  
+let x5 = 650
+let y5 = 50
+  
+let hit=false
+let hit2=false
+let lives=0
+
+var heart1 = true
+var heart2 = true
+var heart3 = true
+var heart4 = true
+var heart5 = true
+  
+var enemy1 = true
+var enemy2 = true
+var enemy3 = true
+var enemy4 = true
+  
+var charaTint = false
+  
+var screen = 1
+  
+let counter = 0
+var ex1_backbutton;
+///////////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////exercise 2///////////////////////////////////////////
 
 
@@ -68,6 +117,57 @@ var ex2_soundMainOn = false
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////  exercise 3   ///////////////////////////////////
+//initialising variables
+let ex3scores = [];
+let i = 0;
+let ex3score = 0; 
+let ex3test = 0;
+let ex3mode;
+var ex3carIm;
+var ex3buttonStart;
+var ex3buttonBack;
+var ex3buttonMainMenu;
+var ex3Instructions;
+var ex3Title;
+var ex3Car1Im;
+var ex3Car2Im;
+var ex3Car3Im;
+var ex3Car4Im;
+var ex3Car5Im;
+var ex3Car6Im;
+var ex3GameOver;
+var ex3restart = false;
+var ex3restart1 = false;
+let ex3collide = false;
+let ex3collide2 = false;
+let ex3collide3 = false;
+let ex3collide4 = false;
+let ex3collide5 = false;
+let ex3collide6 = false;
+let ex3count =100001;
+
+
+//Display Game Over
+ let ex3txt = {
+   ex3_textScore: "Your score is: ",
+   color: 255,
+   stroke: 255,
+   size: 58,
+   size1: 24,
+   x: 400,
+   y: 350,
+   x1: 1400,
+   y1: 700,
+ }
+
+
+ //Loading images
+let bordL;
+let bordR;
+
+/////////////////////////////////////////////////////////////////////////////////////
+
 
 /////////////////////////////////  exercise 4    /////////////////////////////////////
 var ex4At = 0;
@@ -88,7 +188,14 @@ var ex4_bellSound2;
 var ex4_mouseOverSound;
 var ex4_diedSound;
 var ex4_startPageSound;
-var ex4_monsterPic;
+var ex4_startPagesoundOn = false;
+var ex4_gameSong;
+var ex4_gameSong1;
+var ex4_gameSong2;
+var ex4_gameSong3;
+var ex4_gameSong4;
+var ex4_gameSongOn = false;
+var ex4_gameHight = [225,250,275,300,325,350,375,400,425,450,475,500,525,150];
 
 ////////// Start Page //////////////
 var ex4_playbutton;
@@ -110,10 +217,19 @@ var ex4_mouseMove;
 var ex4_px;
 var ex4_py;
 var ex4_pSpeed = 10;
-
+var ex4_levelOfDif;
+var ex4_levelOfDifObject;
+var ex4_buttonLevel1;
+var ex4_buttonLevel2;
+var ex4_buttonLevel3;
+var ex4_buttonLevel4;
+var ex4_buttonLevel1Big = false;
+var ex4_buttonLevel2Big = false;
+var ex4_buttonLevel3Big = false;
+var ex4_buttonLevel4Big = false;
 
 /////////// PlayPage ///////////////
-var ex4_gameSpeed = 5;
+var ex4_gameSpeed = 3;
 var ex4_speedx1 = 0;
 var ex4_speedx2;
 var ex4_speedx3 = 0;
@@ -125,6 +241,7 @@ var ex4_speedx8;
 var ex4_speedx9 = 0;
 var ex4_speedx10;
 var ex4_fruitShow;
+var ex4_sAnimation;
 var ex4_f0;
 var ex4_f1;
 var ex4_f2;
@@ -144,17 +261,6 @@ var ex4_f15;
 var ex4_f16;
 var ex4_f17;
 var ex4_f;
-var ex4_s1;
-var ex4_s2;
-var ex4_s3;
-var ex4_s4;
-var ex4_s5;
-var ex4_s6;
-var ex4_s7;
-var ex4_s8;
-var ex4_s9;
-var ex4_s;
-var c;
 var ex4_bg1;
 var ex4_bg2;
 var ex4_bg3;
@@ -166,13 +272,18 @@ var ex4_bg3s = 1;
 var ex4_bg4s = 2;
 var ex4_bg5s = 3;
 var ex4_bg = [];
+var ex4_monster;
+var ex4_difficalty = 0.01;
+var ex4_oldM;
+var ex4_soundWinning
 
-//////////Score counting/////////
+/////////////////Score counting//////////////////////////
 var ex4_scoreCount = 0;
 let ex4_colorCount;
 
 
 //////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * @author Aphimon Sangmanee, Abhyuday Srivastava
  * 
@@ -181,18 +292,38 @@ let ex4_colorCount;
  */
 function preload()
 {
+  ///////////////////////////////// main menu //////////////////////////////////////////
   bgFirst = loadImage('firstPic.png');
   song = loadSound('mainSong.mp3');
   bgMainMenu = loadImage('nevigatorPic.png')
-  ex1_buttonAtMain1 = loadImage('res\\mainMenu\\button1.png');
-  ex1_buttonAtMain2 = loadImage('res\\mainMenu\\button2.png')
-  ex2_buttonAtMain1 = loadImage('res\\mainMenu\\button1.png');
-  ex2_buttonAtMain2 = loadImage('res\\mainMenu\\button2.png')
-  ex3_buttonAtMain1 = loadImage('res\\mainMenu\\button1.png');
-  ex3_buttonAtMain2 = loadImage('res\\mainMenu\\button2.png')
-  ex4_buttonAtMain1 = loadImage('res\\mainMenu\\button1.png');
-  ex4_buttonAtMain2 = loadImage('res\\mainMenu\\button2.png');
+  ex1_buttonAtMain1 = loadImage('res\\mainMenu\\ex1_buttonAtMain.jpg');
+  ex1_buttonAtMain2 = loadImage('res\\mainMenu\\ex1_buttonAtMain.jpg')
+  ex2_buttonAtMain1 = loadImage('res\\mainMenu\\ex2_buttonAtMain.jpg');
+  ex2_buttonAtMain2 = loadImage('res\\mainMenu\\ex2_buttonAtMain.jpg')
+  ex3_buttonAtMain1 = loadImage('res\\mainMenu\\ex3_buttonAtMain.png');
+  ex3_buttonAtMain2 = loadImage('res\\mainMenu\\ex3_buttonAtMain.png')
+  ex4_buttonAtMain1 = loadImage('res\\mainMenu\\ex4_buttonAtMain.jpg');
+  ex4_buttonAtMain2 = loadImage('res\\mainMenu\\ex4_buttonAtMain.jpg');
   ex4_mouseOverSound = loadSound('res\\exercise4\\mouseOverSound.mp3');
+  // ex1_textAtMain =loadImage('');
+  // ex2_textAtMain =loadImage('');
+  // ex3_textAtMain =loadImage('');
+  // ex4_textAtMain =loadImage('');
+
+  /////////////////////////////////////////////////////////////////////////////////////
+
+  //////////////////////////Exercise 1////////////////////////////////////////
+  back=loadImage("res\\exercise1\\Background.gif") 
+	heart01=loadImage("res\\exercise1\\Potion.gif")
+	bat=loadImage("res\\exercise1\\LittleWitch1.gif")
+	enemy=loadImage("res\\exercise1\\Monster.gif")
+	lightstar=loadImage("res\\exercise1\\star3.gif")
+	win=loadImage("res\\exercise1\\WinScreen.gif")
+	start=loadImage("res\\exercise1\\startscreen1.gif")
+	death=loadImage("res\\exercise1\\LoseScreen.gif")
+  ex1_backbutton = loadImage("res\\exercise1\\ex1_backButton.jpg");
+
+  //////////////////////////////////////////////////////////////////////////////
 
  ////////////////////////Excercise_2///////////////////////////////////////////////
 
@@ -238,7 +369,6 @@ function preload()
   ex2_crosshair = createSprite(2,2)
   ex2_crosshair.addAnimation('normal', 'res\\exercise2\\crosshair.png')
   ex2_crosshair.changeAnimation('normal')
- 
   ex2_startSound = loadSound('res\\exercise2\\tring.mp3')
   ex2_popSound = loadSound('res\\exercise2\\pop.mp3')
   ex2_overSound = loadSound('res\\exercise2\\wow.mp3')
@@ -249,6 +379,25 @@ function preload()
 
 ///////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////exercise 3/////////////////////////////////////////
+ex3carIm = loadImage("res\\exercise3\\ex3_car.png");
+  ex3buttonStart = loadImage("res\\exercise3\\ex3Start.png");
+  ex3buttonBack = loadImage("res\\exercise3\\ex3BackToStart.png");
+  ex3buttonMainMenu = loadImage("res\\exercise3\\ex3MainMenu.png");
+  ex3_tree = loadImage("res\\exercise3\\ex3Tree.png")
+  ex3GameOver = loadImage("res\\exercise3\\GameOverex3.png");
+  ex3Car1Im = loadImage("res\\exercise3\\Car1Ex3.png");
+  ex3Car2Im = loadImage("res\\exercise3\\Car2Ex3.png");
+  ex3Car3Im = loadImage("res\\exercise3\\Car3Ex3.png");
+  ex3Car4Im = loadImage("res\\exercise3\\Car4Ex3.png");
+  ex3Car5Im = loadImage("res\\exercise3\\Car5Ex3.png");
+  ex3Car6Im = loadImage("res\\exercise3\\Car6Ex3.png");
+  ex3Title =  loadImage("res\\exercise3\\Ex3Title.png");
+  ex3Instructions = loadImage("res\\exercise3\\Ex3Instructions.png");
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
   ///////////////////////////////exercise 4///////////////////////////////////////////
   ex4_jumpSound = loadSound('res\\exercise4\\jumpSound.mp3');
   ex4_bellSound1 = loadSound('res\\exercise4\\bell1.mp3');
@@ -256,6 +405,10 @@ function preload()
   ex4_mouseOverSound = loadSound('res\\exercise4\\mouseOverSound.mp3');
   ex4_diedSound = loadSound('res\\exercise4\\diedSound.mp3');
   ex4_startPageSound = loadSound('res\\exercise4\\startPageSound.mp3');
+  ex4_gameSong1 = loadSound('res\\exercise4\\gameSong1.mp3');
+  ex4_gameSong2 = loadSound('res\\exercise4\\gameSong2.mp3');
+  ex4_gameSong3 = loadSound('res\\exercise4\\gameSong3.mp3');
+  ex4_gameSong4 = loadSound('res\\exercise4\\gameSong4.mp3');
   ex4_BGStartPage = loadImage('res\\exercise4\\background.png');
   ex4_buttonPlay1 = loadImage('res\\exercise4\\button1.png');
   ex4_buttonPlay2 = loadImage('res\\exercise4\\button2.png');
@@ -263,6 +416,10 @@ function preload()
   ex4_buttonBack2 = loadImage('res\\exercise4\\toMainbutton2.png');
   ex4_buttonToStart1 = loadImage('res\\exercise4\\backButton1.png');
   ex4_buttonToStart2 = loadImage('res\\exercise4\\backButton2.png');
+  // ex4_sAnimation = loadAnimation('res\\exercise4\\s1.png','res\\exercise4\\s2.png','res\\exercise4\\s3.png',
+  // 'res\\exercise4\\s4.png','res\\exercise4\\s5.png','res\\exercise4\\s6.png','res\\exercise4\\s7.png','res\\exercise4\\s8.png',
+  // 'res\\exercise4\\s9.png');
+  ex4_sAnimation = loadAnimation('res\\exercise4\\s2.png','res\\exercise4\\s4.png','res\\exercise4\\s6.png','res\\exercise4\\s8.png');
   ex4_f0 = loadImage('res\\exercise4\\1.png');
   ex4_f1 = loadImage('res\\exercise4\\2.png');
   ex4_f2 = loadImage('res\\exercise4\\3.png');
@@ -280,15 +437,6 @@ function preload()
   ex4_f14 = loadImage('res\\exercise4\\15.png');
   ex4_f15 = loadImage('res\\exercise4\\16.png');
   ex4_f16 = loadImage('res\\exercise4\\17.png');
-  ex4_s1 = loadImage('res\\exercise4\\s1.png');
-  ex4_s2 = loadImage('res\\exercise4\\s2.png');
-  ex4_s3 = loadImage('res\\exercise4\\s3.png');
-  ex4_s4 = loadImage('res\\exercise4\\s4.png');
-  ex4_s5 = loadImage('res\\exercise4\\s5.png');
-  ex4_s6 = loadImage('res\\exercise4\\s6.png');
-  ex4_s7 = loadImage('res\\exercise4\\s7.png');
-  ex4_s8 = loadImage('res\\exercise4\\s8.png');
-  ex4_s9 = loadImage('res\\exercise4\\s9.png');
   ex4_bg1 = loadImage('res\\exercise4\\bg1.png');
   ex4_bg2 = loadImage('res\\exercise4\\bg2.png');
   ex4_bg3 = loadImage('res\\exercise4\\bg3.png');
@@ -299,9 +447,19 @@ function preload()
   ex4_logo2 = loadImage('res\\exercise4\\logo2.png');
   ex4_jump1 = loadImage('res\\exercise4\\key1.png');
   ex4_jump2 = loadImage('res\\exercise4\\key2.png');
+  ex4_jumpLogo1 = loadImage('res\\exercise4\\jump1.png');
+  ex4_jumpLogo2 = loadImage('res\\exercise4\\jump2.png');
+  ex4_moveLogo1 = loadImage('res\\exercise4\\moveLogo1.png');
+  ex4_moveLogo2 = loadImage('res\\exercise4\\moveLogo2.png');
   ex4_mouseMove = loadImage('res\\exercise4\\mouse.png');
-  ex4_monsterPic = loadImage('res\\exercise4\\monster0.png');
-  //////////////////////////////////////////////////////////////////////////
+  ex4_monsterPic = loadImage('res\\exercise4\\monster2.png');
+  ex4_monsterPic2 = loadImage('res\\exercise4\\monster1.png');
+  ex4_buttonLevel1 = loadImage('res\\exercise4\\buttonLevel1.png');
+  ex4_buttonLevel2 = loadImage('res\\exercise4\\buttonLevel2.png');
+  ex4_buttonLevel3 = loadImage('res\\exercise4\\buttonLevel3.png');
+  ex4_buttonLevel4 = loadImage('res\\exercise4\\buttonLevel4.png');
+  ex4_soundWinning = loadSound('res\\exercise1\\ex4_soundWinning.mp3')
+  ///////////////////////////////////////////////////////////////////////////////////////
 }
 
 /**
@@ -312,11 +470,20 @@ function preload()
  */
 function setup() 
 {
+  //////////////////////////// Main menu ////////////////////////////////////////////////
+  frameRate(60);
   createCanvas(1400, 700);
   ex1_buttonAtMain = ex1_buttonAtMain1
   ex2_buttonAtMain = ex2_buttonAtMain1
   ex3_buttonAtMain = ex3_buttonAtMain1
-  ex4_buttonAtMain = ex4_buttonAtMain1;
+  ex4_buttonAtMain = ex4_buttonAtMain1
+
+  //////////////////////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////// exercise 1//////////////////////////////////////////
+  //code//
+
+  //////////////////////////////////////////////////////////////////////////////////////
   
   //////////////////////////////excercise2////////////////////////////////////////////
 
@@ -348,7 +515,6 @@ function setup()
     ex2_pos[i+1] = random(0,4000)
   }
 
-
   ex2_group3.add(ex2_retryButton)
 
   ex2_logo.position.x = 1000
@@ -363,18 +529,26 @@ function setup()
   ex2_bearBlow.position.x = 700
   ex2_bearBlow.position.y = 350
 
-
-
   ex2_retryButton.position.x = 600
   ex2_retryButton.position.y = 500
 
   
-  
-
-
-
-
   ///////////////////////////////////////////////////////////////////////////////
+ 
+  //////////////////////////// exercise 3 //////////////////////////////
+  //storing the scores
+  ex3mode=0;
+  for(let i=0; i<100;i++){
+    ex3test += 10;
+    ex3scores[i] = ex3test;
+ }
+ 
+  
+  bordL = new Borders();
+  bordR = new Borders();
+  bordR.x = 1250;
+
+  ////////////////////////////////////////////////////////////////////////////
 
   //////////////////////////exercise4////////////////////////////////////////
   ex4_speedx2 = width;
@@ -382,15 +556,14 @@ function setup()
   ex4_speedx6 = width;
   ex4_speedx8 = width;
   ex4_speedx10 = width;
-  monster = new Monster(ex4_monsterPic);
+  monster = new Monster(ex4_monsterPic, ex4_monsterPic2);
   ex4_f = [ex4_f0,ex4_f1,ex4_f2,ex4_f3,ex4_f4,ex4_f5,ex4_f6,
     ex4_f7,ex4_f8,ex4_f9,ex4_f10,ex4_f11,ex4_f12,ex4_f13,ex4_f14,ex4_f15,ex4_f16];
-  ex4_s = [ex4_s1,ex4_s2,ex4_s3,ex4_s4,ex4_s5,ex4_s6,ex4_s7,ex4_s8,ex4_s9]
-  c = 0;
   ex4_bg = [ex4_bg1,ex4_bg2,ex4_bg3,ex4_bg4,ex4_bg5]
   ex4_logo = ex4_logo1;
   ex4_jump = ex4_jump1;
   ex4_px = 800;
+  ex4_gameSong = ex4_gameSong1;
 
   ////////////////////////////////////////////////////////////////////////////
 }
@@ -404,32 +577,35 @@ function draw()
 {
   switch(at)
   {
-    //Case 0 pulls up the first page.
+    ///////Case 0 pulls up the first page.//////////
     case 0:
       firstPage();
       break;
     
-    //Case 1 pulls up the mainMenu 
+    ////////Case 1 pulls up the mainMenu //////////////
     case 1:
       
       if(!soundMainOn)
       {
-        song.play();
+        song.loop();
         soundMainOn = true;
       }
       mainMenu();
       break;
       
-    //Case 2 = exercise 1
+    //////////Case 2 = exercise 1 //////////////////////
     case 2:
       song.stop();
-      frameRate(30)
-      
-      background(200);
-
+      if(screen==1)
+      {
+        startScreen()
+      }
+      else if(screen==2){playScreen()}
+      else if(screen==3){winScreen()} 
+      else if(screen==4){deathScreen()}
       break;
 
-    //Case 3 = exercise 2
+    ///////////////Case 3 = exercise 2/////////////////////
     case 3:
       song.stop();  
 
@@ -442,38 +618,77 @@ function draw()
       frameRate(24)
       ex2_gameLoop()
       ex2_ui()
-      
-    
       break;
-    //Case 4 = exercise 3
+    ////////////////Case 4 = exercise 3/////////////////////
     case 4:
-      frameRate(30)
       song.stop();
-      background(200);
+      if(ex3mode===0)
+      {
+        
+        background(canv.col);
+        image(ex3buttonStart,820,125,350,150);
+        image(ex3buttonMainMenu,750,400,500,150);
+        image(ex3Title, 150, 90, 450, 350);
+        image(ex3Instructions,150, 485, 450, 150);
+        
+    
+      }
+      if(ex3mode===1)
+      {
+      background(canv.col);
+      moveLines();
+      moveTrees();
+      design();
+      moveCars();
+      levelUp();
+      fill(0);
+      rect(0,0,1400,80);
+      displayScore();
+      }
+    
+      if(ex3mode===2)
+      {
+        background(0);
+    
+        image(ex3buttonBack,370,440,650,150);
+        displayScore();
+        image(ex3GameOver, 500, 150, 400, 240);
+    
+      }
       break;
-    //Case 5 = exercise 4
-    case 5:
-      frameRate(30) 
 
+    /////////////////Case 5 = exercise 4////////////////////
+    case 5:
+      frameRate(60);
       song.stop();
       switch(ex4At)
       {
         case 0:
-          //ex4_startPageSound.play();
+          if(!ex4_startPagesoundOn)
+          {
+            ex4_gameSong.stop();
+            ex4_startPageSound.loop();
+            ex4_startPagesoundOn = true;
+          }
           ex4_scoreCount = 0;
           fruits = [];
           spikes = [];
           ex4_startPage();
           break;
         case 1:
-          //ex4_startPageSound.stop();
-          ex4At = 2;
-          //prePlayPage();
+          prePlayPage();
           break;
         case 2:
+          if(!ex4_gameSongOn)
+          {
+            ex4_startPageSound.stop();
+            ex4_gameSong.loop();
+            ex4_gameSongOn = true;
+          }
           ex4_playPage();
           break;
         case 3:
+          ex4_gameSong.stop();
           ex4_scorePage();
           break;
         default:
@@ -502,6 +717,7 @@ function firstPage()
  * @author Abhyuday Srivastava, Aphimon Sangmanee
  * 
  * @description This is the main menu that will bring users to each exercises.
+ * There are four exercises for users to pick.
  */
 function mainMenu()
 { 
@@ -509,13 +725,16 @@ function mainMenu()
   fill("black")
   textSize(21)
   let text1 = ["excercise 1","excercise 2","excercise 3","excercise 4"]
-  locationx = [525,1025,525,1025]
+  // let text1 = [ex1_textAtMain,ex2_textAtMain,ex3_textAtMain,ex4_textAtMain]
+  locationx = [390,900,390,900]
   locationy = [350,350,650,650]
 
+  
   offset = 280
   for(i = 0; i<4;i++)
   {
     //image(bi,locationx[i] - offset,locationy[i] - offset)
+    //rect(locationx[i],locationy[i],100,25)
     text(text1[i],locationx[i],locationy[i])
   }
 
@@ -629,6 +848,7 @@ function mainMenu()
        }
        else if(mouseX>745 && mouseY>370 && mouseX<1134  && mouseY< 605)
        {
+        ex4_startPagesoundOn = false;
         at = 5
        }
        break;
@@ -637,11 +857,63 @@ function mainMenu()
        break;
  
      case 3:
- 
+       if(ex2_gameStatus == 1)
+       {
+        if (ex2_crosshair.overlap(ex2_exitButton))
+        {
+            at = 1
+            ex2_ost.stop()
+            ex2_soundMainOn = false
+            soundMainOn = false
+        }
+       }
        break;
  
      case 4:
- 
+      switch(ex3mode)
+      {
+        case 0:
+          if(mouseX > 820 && mouseY > 125 && mouseX < 1170 && mouseY < 275)
+          {
+            ex3mode = 1;
+          }
+          if(mouseX > 750 && mouseY > 400 && mouseX < 1250 && mouseY < 550)
+          {
+            at = 1;
+            soundMainOn = false
+          }
+          break;
+    
+        case 1:
+    
+          break;
+    
+        case 2:
+          if(mouseX > 370 && mouseY > 440 && mouseX < 1020 && mouseY < 590)
+          {
+            ex3restart = true;
+            //ex3count = 0;
+            ex3mode = 0;
+            ex3score = 0;
+            ex3collide = false;
+            ex3collide2 = false;
+            ex3collide3 = false;
+            ex3collide4 = false;
+            ex3collide5 = false;
+            ex3collide6 = false;
+            myCar.resetPosition();
+            car1.resetPosition();
+            car2.resetPosition();
+            car3.resetPosition();
+            car4.resetPosition();
+            car5.resetPosition();
+            car6.resetPosition();
+            i = 0;
+            _line.sp = 5;
+          _line1.sp = 5;
+          }
+          break;
+      }
        break;
  
      case 5:
@@ -651,15 +923,70 @@ function mainMenu()
           if(mouseX>550 && mouseY>375 && mouseX<850 && mouseY<450)
           {
             ex4At = 1;
+            ex4_startPagesoundOn = false;
+            ex4_gameSongOn = false;
           }
             else if(mouseX>550 && mouseY>475  && mouseX<850  && mouseY<550  )
           {
+            ex4_startPageSound.stop();
+            soundMainOn = false
             at = 1;
-            soundMainOn = false;
           }
           break;
         case 1:
-    
+
+          if(mouseX>1000 && mouseY>100 && mouseX<1350 && mouseY<175)
+          {
+            ex4_gameSpeed = 3;
+            ex4_bg1s = 0.5;
+            ex4_bg2s = 0.5;
+            ex4_bg3s = 1;
+            ex4_bg4s = 2;
+            ex4_bg5s = 3;
+            ex4_difficalty = 0.01;
+            ex4_gameSong = ex4_gameSong1;
+            ex4At = 2;
+          }
+
+          if(mouseX>1000 && mouseY>250 && mouseX<1350 && mouseY<325)
+          {
+            ex4_gameSpeed = 5;
+            ex4_bg1s = 2;
+            ex4_bg2s = 2;
+            ex4_bg3s = 3;
+            ex4_bg4s = 4;
+            ex4_bg5s = 5;
+            ex4_difficalty = 0.01;
+            ex4_gameSong = ex4_gameSong2;
+            ex4At = 2;
+          }
+
+          if(mouseX>1000 && mouseY>400 && mouseX<1350 && mouseY<475)
+          {
+            ex4_gameSpeed = 7;
+            ex4_bg1s = 4;
+            ex4_bg2s = 4;
+            ex4_bg3s = 5;
+            ex4_bg4s = 6;
+            ex4_bg5s = 7;
+            ex4_difficalty = 0.02;
+            ex4_gameSong = ex4_gameSong3;
+            ex4At = 2;
+          }
+
+          if(mouseX>1000 && mouseY>550 && mouseX<1350 && mouseY<625)
+          {
+            ex4_gameSpeed = 10;
+            ex4_bg1s = 7;
+            ex4_bg2s = 7;
+            ex4_bg3s = 8;
+            ex4_bg4s = 9;
+            ex4_bg5s = 10;
+            ex4_difficalty = 0.05;
+            ex4_gameSong = ex4_gameSong4;
+            ex4At = 2;
+          }
+
           break;
         case 2:
           
@@ -678,6 +1005,11 @@ function mainMenu()
    }
  }
 
+ /**
+  * @author Aphimon Sangmanee
+  * 
+  * @description This function will received any interections occer with the kayboard
+  */
  function keyPressed()
  {
   switch(at)
@@ -691,6 +1023,10 @@ function mainMenu()
     case 3:
       break;
     case 4:
+      if(keyCode===ENTER && ex3mode===0)
+      {
+        ex3mode=1;
+      }
       break;
     case 5:
       switch(ex4At)
@@ -698,10 +1034,7 @@ function mainMenu()
         case 0:
           break;
         case 1:
-          if(key == ' ')
-          {
-            ex4At = 2;
-          }
+          
           break;
         case 2:
           if(key == ' ')
@@ -718,7 +1051,12 @@ function mainMenu()
     break;
     }
  }
- 
+
+/**
+* @author Aphimon Sangmanee
+*
+*@description This function will detect the movement of users withina a certain area using mouseX and mouseY
+*/
 function mouseOver1()
 {
   switch(at)
@@ -792,6 +1130,46 @@ function mouseOver1()
             ex4_backbutton = ex4_buttonBack1;
           }
           break;
+
+        case 1:
+          if(mouseX>1000 && mouseY>100 && mouseX<1350 && mouseY<175)
+          {
+            ex4_buttonLevel1Big = true;
+          }
+          else
+          {
+            ex4_buttonLevel1Big = false;
+          }
+
+          if(mouseX>1000 && mouseY>250 && mouseX<1350 && mouseY<325)
+          {
+            ex4_buttonLevel2Big = true;
+          }
+          else
+          {
+            ex4_buttonLevel2Big = false;
+          }
+
+          if(mouseX>1000 && mouseY>400 && mouseX<1350 && mouseY<475)
+          {
+            ex4_buttonLevel3Big = true;
+          }
+          else
+          {
+            ex4_buttonLevel3Big = false;
+          }
+
+          if(mouseX>1000 && mouseY>550 && mouseX<1350 && mouseY<625)
+          {
+            ex4_buttonLevel4Big = true;
+          }
+          else
+          {
+            ex4_buttonLevel4Big = false;
+          }
+
+          break;
+
         case 3:
           if(mouseX>550 && mouseY>375 && mouseX<850 && mouseY<450)
           {
@@ -807,17 +1185,261 @@ function mouseOver1()
 
   }
 }
+/**
+ * @author Aphimon Sangmanee
+ * 
+ * @description This function will detect mouse pressed of each exercises.
+ */
+
+function mousePressed()
+{
+  switch(at)
+  {
+    case 0:
+      break;
+    case 1:
+      break;
+    case 2:
+        if(screen==1)
+        {
+          if(mouseX>600 && mouseY>325 && mouseX<800 && mouseY<400)
+          {
+            screen=2
+          }
+
+          if(mouseX>0 && mouseY>650 && mouseX<150 && mouseY<700)
+          {
+            soundMainOn = false;
+            at = 1;
+          }
+        }
+        else if(screen==3){
+        screen=1
+        lives=0
+        counter=0
+        rY = 100
+        rX = 30
+        x = 650
+        y = 150
+        x2 = 660
+        y2 = 50
+        x3 = 640
+        y3 = 150
+        x4 = 650
+        y4 = 100
+        x5 = 650
+        y5 = 50
+        
+        hit=false
+        hit2=false
+
+        heart1 = true
+        heart2 = true
+        heart3 = true
+        heart4 = true
+        heart5 = true
+        
+        enemy1 = true
+        enemy2 = true
+        enemy3 = true
+        enemy4 = true
+        
+      }
+        else if(screen==4){
+        screen=1
+        lives=0
+        counter=0
+        rY = 100
+        rX = 30
+        x = 650
+        y = 150
+        x2 = 660
+        y2 = 50
+        x3 = 640
+        y3 = 150
+        x4 = 650
+        y4 = 100
+        x5 = 650
+        y5 = 50
+        
+        hit=false
+        hit2=false
+
+        heart1 = true
+        heart2 = true
+        heart3 = true
+        heart4 = true
+        heart5 = true
+        
+        enemy1 = true
+        enemy2 = true
+        enemy3 = true
+        enemy4 = true
+      }
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+    case 5:
+      break;
+    }
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
- * @author Basair Kadhim
- * 
- * @description
- */
-function exercise1()
-{
 
+////////////////////////////////////////////////////// exercise 1 ///////////////////////////////////////////////////
+function startScreen()
+{
+  image(start,0,0,1400,700)
+  image(ex1_backbutton,0,650,150,50)
+}  
+
+
+function playScreen()
+{
+  image(back,0,0,1400,700)
+
+  counter++;
+  
+ 
+  if(charaTint==true){
+  tint(255,50)
+  }
+  
+  
+
+	charaTint==true
+  image(bat,rX,rY,250,250)
+  if(key=='s'){
+    rY=rY+5}
+  if(key=="w"){
+    rY=rY-5}
+
+  if(rY>500){rY=500}
+  if(rY<-10){rY=-10}
+  
+
+	if(counter>300){
+  if(enemy1==true){
+  x=x-7
+  fill(200,0,0)
+	noTint()
+  image(enemy,x,y,250,250)
+  if(x==-21){
+  x=1400
+  y=random(150,350)
+
+  if(x==0 || counter>3000){
+  enemy1=false}
+}}}
+ 
+
+
+  if(enemy3==true){
+  x3=x3-5
+  fill(0,0,200)
+	noTint()
+  image(enemy,x3,y3,250,250)
+  if(x3==-20){
+  x3=1400
+  y3=random(0,250)
+    
+  if(x3==0 || counter>3000){
+  enemy3=false}
+}}
+ 
+	if(counter>1000){
+  if(enemy4==true){
+  x4=x4-10
+  fill(0)
+	noTint()
+  image(enemy,x4,y4,250,250)
+  if(x4==-20){
+  x4=1400
+  y4=random(300,450)
+		
+    
+   if(x4==0 || counter>3000){
+  enemy4=false}
+}}}
+   
+//hope star
+  if(counter>3300){
+  x5=x5-2
+  fill(0)
+	noTint()
+  image(lightstar,x5,y5,200,200)
+  rY=100
+  }
+  
+  var distanceH = dist(rX,rY,x5,y5)
+  if(distanceH<60)
+  {
+    ex4_soundWinning.play();
+    screen=3
+  }
+  
+  
+  var distance = dist(rX,rY,x,y)
+  var distance2 = dist(rX,rY,x2,y2)
+  var distance3 = dist(rX,rY,x3,y3)
+  var distance4 = dist(rX,rY,x4,y4)
+
+  if(heart1==true){
+  image(heart01,5,5,70,70)
 }
+  if(heart2==true){
+  image(heart01,30,5,70,70)
+}
+  if(heart3==true){
+  image(heart01,55,5,70,70)
+}
+  if(heart4==true){
+  image(heart01,80,5,70,70)
+}
+  if(heart5==true){
+  image(heart01,105,5,70,70)
+}
+ 
+  if(hit==true){
+  if(distance<40 || distance2<40 || distance3<40 || distance4<40){
+  hit=false
+  lives=lives+5
+	charaTint=true}
+}
+
+  if(distance>40 && distance2>40 && distance3>40 && distance4>40){
+  hit=true
+	charaTint=false}
+
+  if(lives==5){
+  heart1=false}
+  if(lives==10){
+  heart2=false}
+  if(lives==15){
+  heart3=false}
+  if(lives==20){
+  heart4=false}
+  if(lives==25){
+  heart5=false}  
+  
+  if(lives==25)
+  {
+    ex4_diedSound.play();
+    screen=4
+  }
+}
+
+function deathScreen(){
+image(death,0,0,1400,700)
+}
+
+function winScreen(){
+  image(win,0,0,1400,700)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////// exercise 2 ///////////////////////////////////////////////////////////////
 
@@ -881,6 +1503,7 @@ function ex2_gameLoop()
 
 function ex2_startScreen()
 {
+
   if (ex2_crosshair.overlap(ex2_startGameButton))
   {
     ex2_startGameButton.scale = 1.15
@@ -899,12 +1522,10 @@ function ex2_startScreen()
   if (ex2_crosshair.overlap(ex2_exitButton))
   {
     ex2_exitButton.scale = 1.15
-    if(mouseWentDown(LEFT))
-    {
-      
-      ex2_mainMenu()
-      
-    }
+    // if(mouseWentDown(LEFT))
+    // {
+    //   ex2_mainMenu()
+    // }
   }
   else
   {
@@ -941,7 +1562,6 @@ function ex2_gameScreen()
 
       var ex2_t = random(0,1)
       ex2_popSound.play()
-      
 
     }
 
@@ -999,32 +1619,175 @@ function ex2_endScreen()
 }
 
 
-function ex2_mainMenu()
-{
-  at = 0
-  
-  ex2_ost.stop()
-  
-  ex2_soundMainOn = false
-  soundMainOn = false
+// function ex2_mainMenu()
+// {
+//   at = 0
 
-  
-}
+//   ex2_ost.stop()
+//   ex2_soundMainOn = false
+//   soundMainOn = false
+// }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * @author Sathvika Uppuluri
- * 
- * @description
- */
-function exercise3()
-{
+//////////////////////////////////////////////////////// exercise 3 //////////////////////////////////////////////////////////////
+function design(){
+  bordL.draw();
+  bordR.draw();
+  trees.drawE();
+  myCar.draw(ex3carIm);
+  trees.drawR();
+  trees2.drawE();
+  trees2.drawR();
+}
+//car moving function
+function moveCars(){
 
+   //generating random cars
+
+  if(car1.y<0){
+    car1.x = random(255,310);
+  }
+  
+  
+   
+  if(car2.y<0){
+    car2.x = random(455,310);
+  }
+
+  
+  if(car3.y<0){
+    car3.x = random(655,610);
+  }
+
+   
+  if(car4.y<0){
+    car4.x = random(855,610);
+  }
+
+   
+  if(car5.y<0){
+    car5.x = random(1055,910);
+  }
+
+  
+  if(car6.y<0){
+    car6.x = random(1150,910);
+  }
+
+  //moving and drawing the cars
+  myCar.move();
+    car1.draw(ex3Car1Im);
+    car1.move();
+    car2.draw(ex3Car2Im);
+    car2.move();
+    car3.draw(ex3Car3Im);
+    car3.move();
+    car4.draw(ex3Car4Im);
+    car4.move();
+    car5.draw(ex3Car5Im);
+    car5.move();
+    car6.draw(ex3Car6Im);
+    car6.move();
+
+  ex3collide = collideCar(myCar.x, myCar.y, myCar.w, myCar.h, car1.x, car1.y, car1.w, car1.h);
+  ex3collide2 = collideCar(myCar.x, myCar.y, myCar.w, myCar.h, car2.x, car2.y, car2.w, car2.h);
+  ex3collide3 = collideCar(myCar.x, myCar.y, myCar.w, myCar.h, car3.x, car3.y, car3.w, car3.h);
+  ex3collide4 = collideCar(myCar.x, myCar.y, myCar.w, myCar.h, car4.x, car4.y, car4.w, car4.h);
+  ex3collide5 = collideCar(myCar.x, myCar.y, myCar.w, myCar.h, car5.x, car5.y, car5.w, car5.h);
+  ex3collide6 = collideCar(myCar.x, myCar.y, myCar.w, myCar.h, car6.x, car6.y, car6.w, car6.h);
+
+  if( ex3collide || ex3collide2 || ex3collide3 || ex3collide4 || ex3collide5 || ex3collide6 ){
+    ex3mode = 2;
+    ex4_diedSound.play();
+    ex3restart = false;
+    console.log("collided: ", ex3collide, ex3collide2, ex3collide3, ex3collide4, ex3collide5, ex3collide6);
+  }  
+}
+
+function collideCar(x, y, w, h, x2, y2, w2, h2) {
+
+  //adding in conditions to detect main car
+  if (x + w >= x2 &&    
+      x <= x2 + w2 &&    
+      y + h >= y2 &&    
+      y <= y2 + h2) {    
+        return true;
+  }
+  return false;
+}
+//moves the lines
+function moveLines(){
+  _line.draw();
+  _line.move();
+  _line1.draw();
+  _line1.move();
+}
+//stops the game and displays final score and final speed
+
+function stop()
+{
+    background(0);
+    stroke(ex3txt.stroke);
+    fill(ex3txt.color);
+    textSize(ex3txt.size);
+
+    image(ex3buttonBack,500,400,400,100);
+    // text(txt._text, txt.x, txt.y);
+    // textSize(txt.size1);
+    // noStroke();
+    // text(`${txt._textScore}${score}`, txt.x1, txt.y1);
+    noLoop();
+}
+//trees moving function
+function moveTrees(){
+  trees.moveE();
+  trees.moveR();
+  trees2.moveE();
+  trees2.moveR();
+}
+
+function displayScore(){
+    noStroke();
+    fill(ex3txt.color);
+    textSize(32);
+  //displaying the score
+    text(`YOUR SCORE: ${ex3score}`, 50, 50);
+  //displaying the speed 
+    fill(ex3txt.color);
+    textSize(32);
+    text(`YOUR SPEED: ${car1.sp}0 km/h `, 1000, 50);
 }
 
 
+//this function for increase the speed 
+function levelUp(){
+  
+    if(ex3score === ex3scores[i])
+    {
+      
+      console.log("speeding");
+      //increment every objects speed by 1
+      car1.sp++;
+      car2.sp++;
+      car3.sp++;
+      car4.sp++;
+      car5.sp++;
+      car6.sp++;
+
+      trees.esp++;
+      trees.rsp++;
+      trees2.esp++;
+      trees2.rsp++;
+      _line.sp++;
+      _line1.sp++;
+      i++;
+      //ex3score++;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////// exercise 4 //////////////////////////////////////////////////////////////
 /**
@@ -1039,132 +1802,235 @@ function exercise3()
  */
  function ex4_startPage()
  {
-   background(ex4_BGStartPage);
-   image(ex4_logo,350,50,700,250);
-   if(ex4_logo == ex4_logo1 )
-   {
-     ex4_logo = ex4_logo2;
-   }
-   else
-   {
-     ex4_logo = ex4_logo1;
-   }
-   let oldS = ex4_playbutton;
-   let oldS1 = ex4_backbutton;
-   mouseOver1();
-   let newS = ex4_playbutton;
-   let newS1 = ex4_backbutton;
- 
-   if(oldS != newS)
-   {
-     if(newS != ex4_buttonPlay1)
-     {
-       ex4_mouseOverSound.play();
-     }
-   }
- 
-   if(ex4_playbutton == ex4_buttonPlay1)
-   {
-     image(ex4_playbutton,557,365,300,75);
-   }
-   else
-   {
-     image(ex4_playbutton,540,367.5,350,100);
-   }
- 
-   if(oldS1 != newS1)
-   {
-     if(newS1 != ex4_buttonBack1)
-     {
-       ex4_mouseOverSound.play();
-     }
-   }
- 
-   if(ex4_backbutton == ex4_buttonBack1)
-   {
-     image(ex4_backbutton,535,475,350,75);
-   }
-   else
-   {
-     image(ex4_backbutton,520,467.5,400,100);
-   } 
- }
-
- /**
- * @author Aphimon Sangmanee
- * 
- * @description This page contains all of the implementation for the playPage
- */
-function ex4_playPage()
-{
-  if(random(1) < (0.01))
-  {
-    fruits.push(new Fruits(ex4_gameSpeed,ex4_f[int(random([0],[17]))]));
-  }
-
-  if(random(1) < (0.01 ))
-  {
-    spikes.push(new Spike(ex4_gameSpeed,ex4_s));
-  }
-
-  backgroundRunning();
-  // house.show();
-  monster.show();
-  monster.move();
-
-  for(let f of fruits)
-  {
-    f.move();
-    f.show();
-    if(monster.hitsF(f))
+    background(ex4_BGStartPage);
+    image(ex4_logo,350,50,700,250);
+    if(ex4_logo == ex4_logo1 )
     {
-      for(let i = 0; i < fruits.length; i++)
+      ex4_logo = ex4_logo2;
+    }
+    else
+    {
+      ex4_logo = ex4_logo1;
+    }
+    let oldS = ex4_playbutton;
+    let oldS1 = ex4_backbutton;
+    mouseOver1();
+    let newS = ex4_playbutton;
+    let newS1 = ex4_backbutton;
+
+    if(oldS != newS)
+    {
+      if(newS != ex4_buttonPlay1)
       {
-        if(fruits[i] == f)
-        {
-          fruits.splice(i,1);
-          ex4_scoreCount++;
-          if(ex4_scoreCount % 10 == 0)
-          {
-            ex4_bellSound2.play();
-          }
-          else
-          {
-            ex4_bellSound1.play();
-          }
-        }
+        ex4_mouseOverSound.play();
       }
     }
 
-  }
+    if(ex4_playbutton == ex4_buttonPlay1)
+    {
+      image(ex4_playbutton,557,365,300,75);
+    }
+    else
+    {
+      image(ex4_playbutton,540,367.5,350,100);
+    }
 
-  for(let s of spikes)
+    if(oldS1 != newS1)
+    {
+      if(newS1 != ex4_buttonBack1)
+      {
+        ex4_mouseOverSound.play();
+      }
+    }
+
+    if(ex4_backbutton == ex4_buttonBack1)
+    {
+      image(ex4_backbutton,535,475,350,75);
+    }
+    else
+    {
+      image(ex4_backbutton,520,467.5,400,100);
+    } 
+ }
+
+ /**
+  * @author Aphimon Sangmanee
+  * 
+  * @description This page will show the users the way to play
+  * the game including jump and move. This page also contain the selection of level.
+  * There are 4 available level for users to choose.
+  */
+function prePlayPage()
+{
+  background(ex4_BGStartPage);
+
+  let oldButton1 = ex4_buttonLevel1Big;
+  let oldButton2 = ex4_buttonLevel2Big;
+  let oldButton3 = ex4_buttonLevel3Big;
+  let oldButton4 = ex4_buttonLevel4Big;
+  mouseOver1()
+  let newButton1 = ex4_buttonLevel1Big;
+  let newButton2 = ex4_buttonLevel2Big;
+  let newButton3 = ex4_buttonLevel3Big;
+  let newButton4 = ex4_buttonLevel4Big;
+
+  if(oldButton1 != newButton1 || oldButton2 != newButton2 || oldButton3 != newButton3 || oldButton4 != newButton4)
   {
-    s.move();
-    if(c > 8)
+    if(oldButton1 != true && oldButton2 != true && oldButton3 != true && oldButton4 != true)
     {
-      c = 0
-    }
-    s.show(c);
-    c = c + 2;
-
-    if(monster.hitsS(s))
-    {
-      ex4_diedSound.play();
-      ex4At = 3;
+      ex4_mouseOverSound.play();
     }
   }
-  
-  textSize(50);
-  fill(ex4_colorCount);
-  text('Score ' + ex4_scoreCount , 30, 50);
+
+  if(ex4_buttonLevel1Big)
+  {
+    image(ex4_buttonLevel1,975,90,350,100);
+  }
+  else
+  {
+    image(ex4_buttonLevel1,1000,100,300,75);
+  }
+
+  if(ex4_buttonLevel2Big)
+  {
+    image(ex4_buttonLevel2,975,240,350,100); 
+  }
+  else
+  {
+    image(ex4_buttonLevel2,1000,250,300,75);  
+  }
+
+  if(ex4_buttonLevel3Big)
+  {
+    image(ex4_buttonLevel3,975,390,350,100);
+  }
+  else
+  {
+    image(ex4_buttonLevel3,1000,400,300,75);
+  }
+
+  if(ex4_buttonLevel4Big)
+  {
+    image(ex4_buttonLevel4,975,540,350,100);
+  }
+  else
+  {
+    image(ex4_buttonLevel4,1000,550,300,75);
+  }
+
+  image(ex4_jump,100,500,250,100);
+  ex4_preCount++
+  fill(0)
+  if(ex4_jump == ex4_jump1)
+  {
+    ex4_jump = ex4_jump2;
+    ex4_preCount = 0;
+    image(ex4_jumpLogo1,110,80,250,100);
+    image(ex4_moveLogo1,580,80,250,100);
+  }
+  else
+  {
+    ex4_jump = ex4_jump1;
+    ex4_preCount = 0;
+    image(ex4_jumpLogo2,110,80,250,100);
+    image(ex4_moveLogo2,580,80,250,100);
+  }
+
+  if(ex4_px < 500 || ex4_px > 800)
+  {
+    ex4_pSpeed = ex4_pSpeed * (-1);
+  }
+  ex4_px += ex4_pSpeed;
+  image(ex4_mouseMove,ex4_px,475,100,125);
+  image(ex4_monsterPic,ex4_px,275,100,100)
+
+  monster.showDemo();
+  monster.moveDemo();
 }
 
 /**
  * @author Aphimon Sangmanee
  * 
- * @description
+ * @description This page contains all of the implementation for the playPage. 
+ * 
  */
+ function ex4_playPage()
+ {
+   if(random(1) < (ex4_difficalty))
+   {
+     fruits.push(new Fruits(ex4_gameSpeed,ex4_f[int(random([0],[17]))]));
+   }
+ 
+   if(random(1) < (ex4_difficalty))
+   {
+     spikes.push(new Spike(ex4_gameSpeed,ex4_sAnimation,ex4_gameHight[int(random([0],[14]))]));
+   }
+ 
+   backgroundRunning();
+ 
+   monster.move();
+   let newM = mouseX;
+   if(ex4_oldM > newM)
+   {
+     monster.showBack();
+   }
+   else
+   {
+     monster.show();
+   }
+ 
+   for(let f of fruits)
+   {
+     f.move();
+     f.show();
+     if(monster.hitsF(f))
+     {
+       ex4_scoreCount++;
+       for(let i = 0; i < fruits.length; i++)
+       {
+         if(fruits[i] == f)
+         {
+           fruits.splice(i,1);
+           if(ex4_scoreCount % 10 == 0)
+           {
+             ex4_bellSound2.play();
+           }
+           else
+           {
+             ex4_bellSound1.play();
+           }
+         }
+       }
+     }
+ 
+   }
+ 
+   for(let s of spikes)
+   {
+     s.move();
+     s.show();
+     if(monster.hitsS(s))
+     {
+       ex4_diedSound.play();
+       ex4At = 3;
+     }
+ 
+   }
+ 
+ 
+ 
+   textSize(50);
+   fill(ex4_colorCount);
+   text('Score ' + ex4_scoreCount , 30, 50);
+   ex4_oldM = mouseX;
+ }
+ 
+ /**
+  * @author Aphimon Sangmanee
+  * 
+  * @description This page will show the score to the users. This page has 
+  * button to go back to the first page of the game.
+  */
  function ex4_scorePage()
  {
    background(ex4_BGStartPage);
@@ -1193,79 +2059,83 @@ function ex4_playPage()
      image(ex4_buttonToStart,537.5,367.5,325,100);
    }
  }
-
+ 
+ //////////////////////////////////// Extra fuctionality /////////////////////////////////////////////////
+ 
  /**
- * @author Aphimon Sangmanee
- * 
- * @description
- */
-function backgroundRunning()
-{
-  // image(ex4_BGStartPage, ex4_speedx1, 0, width, height);
-  // image(ex4_BGStartPage, ex4_speedx2, 0, width, height);
-  image(ex4_bg[0], ex4_speedx1, 0, width, height);
-  image(ex4_bg[0], ex4_speedx2, 0, width, height);
-
-  image(ex4_bg[1], ex4_speedx3, 0, width, height);
-  image(ex4_bg[1], ex4_speedx4, 0, width, height);
-
-  image(ex4_bg[2], ex4_speedx5, 0, width, height);
-  image(ex4_bg[2], ex4_speedx6, 0, width, height);
-
-  image(ex4_bg[3], ex4_speedx7, 0, width, height);
-  image(ex4_bg[3], ex4_speedx8, 0, width, height);
-
-  image(ex4_bg[4], ex4_speedx9, 0, width, height);
-  image(ex4_bg[4], ex4_speedx10, 0, width, height);
-
-  ex4_speedx1 -= ex4_bg1s;
-  ex4_speedx2 -= ex4_bg1s;
-
-  ex4_speedx3 -= ex4_bg2s;
-  ex4_speedx4 -= ex4_bg2s;
-
-  ex4_speedx5 -= ex4_bg3s;
-  ex4_speedx6 -= ex4_bg3s;
-
-  ex4_speedx7 -= ex4_bg4s; 
-  ex4_speedx8 -= ex4_bg4s;
-
-  ex4_speedx9 -= ex4_bg5s;
-  ex4_speedx10 -= ex4_bg5s;
-
-  if (ex4_speedx1 < -width){
-    ex4_speedx1 = width;
-  }
-  if (ex4_speedx2 < -width){
-    ex4_speedx2 = width;
-  }
-
-  if (ex4_speedx3 < -width){
-    ex4_speedx3 = width;
-  }
-  if (ex4_speedx4 < -width){
-    ex4_speedx4 = width;
-  }
-
-  if (ex4_speedx5 < -width){
-    ex4_speedx5 = width;
-  }
-  if (ex4_speedx6 < -width){
-    ex4_speedx6 = width;
-  }
-
-  if (ex4_speedx7 < -width){
-    ex4_speedx7 = width;
-  }
-  if (ex4_speedx8 < -width){
-    ex4_speedx8 = width;
-  }
-
-  if (ex4_speedx9 < -width){
-    ex4_speedx9 = width;
-  }
-  if (ex4_speedx10 < -width){
-    ex4_speedx10 = width;
-  }
-}
+  * @author Aphimon Sangmanee
+  * 
+  * @description This fuction integrated 5 layers of background together 
+  * and run them at different speed according to the speed of the game and level of difficalty.
+  */
+ function backgroundRunning()
+ {
+   // image(ex4_BGStartPage, ex4_speedx1, 0, width, height);
+   // image(ex4_BGStartPage, ex4_speedx2, 0, width, height);
+   image(ex4_bg[0], ex4_speedx1, 0, width, height);
+   image(ex4_bg[0], ex4_speedx2, 0, width, height);
+ 
+   image(ex4_bg[1], ex4_speedx3, 0, width, height);
+   image(ex4_bg[1], ex4_speedx4, 0, width, height);
+ 
+   image(ex4_bg[2], ex4_speedx5, 0, width, height);
+   image(ex4_bg[2], ex4_speedx6, 0, width, height);
+ 
+   image(ex4_bg[3], ex4_speedx7, 0, width, height);
+   image(ex4_bg[3], ex4_speedx8, 0, width, height);
+ 
+   image(ex4_bg[4], ex4_speedx9, 0, width, height);
+   image(ex4_bg[4], ex4_speedx10, 0, width, height);
+ 
+   ex4_speedx1 -= ex4_bg1s;
+   ex4_speedx2 -= ex4_bg1s;
+ 
+   ex4_speedx3 -= ex4_bg2s;
+   ex4_speedx4 -= ex4_bg2s;
+ 
+   ex4_speedx5 -= ex4_bg3s;
+   ex4_speedx6 -= ex4_bg3s;
+ 
+   ex4_speedx7 -= ex4_bg4s; 
+   ex4_speedx8 -= ex4_bg4s;
+ 
+   ex4_speedx9 -= ex4_bg5s;
+   ex4_speedx10 -= ex4_bg5s;
+ 
+ 
+   if (ex4_speedx1 < -width + ex4_bg5s){
+     ex4_speedx1 = width;
+   }
+   if (ex4_speedx2 < -width + ex4_bg5s){
+     ex4_speedx2 = width;
+   }
+ 
+   if (ex4_speedx3 < -width + ex4_bg5s){
+     ex4_speedx3 = width;
+   }
+   if (ex4_speedx4 < -width + ex4_bg5s){
+     ex4_speedx4 = width;
+   }
+ 
+   if (ex4_speedx5 < -width + ex4_bg5s){
+     ex4_speedx5 = width;
+   }
+   if (ex4_speedx6 < -width + ex4_bg5s){
+     ex4_speedx6 = width;
+   }
+ 
+   if (ex4_speedx7 < -width + ex4_bg5s){
+     ex4_speedx7 = width;
+   }
+   if (ex4_speedx8 < -width + ex4_bg5s){
+     ex4_speedx8 = width;
+   }
+ 
+   if (ex4_speedx9 < -width + ex4_bg5s){
+     ex4_speedx9 = width;
+   }
+   if (ex4_speedx10 < -width + ex4_bg5s){
+     ex4_speedx10 = width;
+   }
+ } 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
