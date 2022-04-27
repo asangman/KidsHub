@@ -300,8 +300,8 @@ function preload()
   ex1_buttonAtMain2 = loadImage('res\\mainMenu\\ex1_buttonAtMain.jpg')
   ex2_buttonAtMain1 = loadImage('res\\mainMenu\\ex2_buttonAtMain.jpg');
   ex2_buttonAtMain2 = loadImage('res\\mainMenu\\ex2_buttonAtMain.jpg')
-  ex3_buttonAtMain1 = loadImage('res\\mainMenu\\ex3_buttonAtMain.png');
-  ex3_buttonAtMain2 = loadImage('res\\mainMenu\\ex3_buttonAtMain.png')
+  ex3_buttonAtMain1 = loadImage('ex3_buttonAtMain.jpg');
+  ex3_buttonAtMain2 = loadImage('ex3_buttonAtMain.jpg')
   ex4_buttonAtMain1 = loadImage('res\\mainMenu\\ex4_buttonAtMain.jpg');
   ex4_buttonAtMain2 = loadImage('res\\mainMenu\\ex4_buttonAtMain.jpg');
   ex4_mouseOverSound = loadSound('res\\exercise4\\mouseOverSound.mp3');
